@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/hex"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -29,11 +30,14 @@ func encryptFromStdin() {
 	if err != nil {
 		panic(err)
 	}
-	keyInput := []byte(secretkey)
-	if len(keyInput) != 32 {
-		panic(fmt.Errorf("Your key is %d bytes in size. Exactly 32 bytes are required.", len(keyInput)))
+	keyInput, err := hex.DecodeString(string(secretkey))
+	if err != nil {
+		panic(err)
 	}
-	key := secretkey
+	if len(keyInput) != 32 {
+		panic(fmt.Errorf("Your key is %d hex bytes in size. Exactly 32 hex bytes are required.", len(keyInput)))
+	}
+	key := keyInput
 	tweak := nonce // can be any length, but should be at least 12 bytes.
 	cipher := adiantum.New(key)
 	output := cipher.Encrypt(input, tweak)
@@ -63,11 +67,14 @@ func decryptFromStdin() {
 	if err != nil {
 		panic(err)
 	}	
-	keyInput := []byte(secretkey)
-	if len(keyInput) != 32 {
-		panic(fmt.Errorf("Your key is %d bytes in size. Exactly 32 bytes are required.", len(keyInput)))
+	keyInput, err := hex.DecodeString(string(secretkey))
+	if err != nil {
+		panic(err)
 	}
-	key := secretkey
+	if len(keyInput) != 32 {
+		panic(fmt.Errorf("Your key is %d hex bytes in size. Exactly 32 hex bytes are required.", len(keyInput)))
+	}
+	key := keyInput
 	tweak := nonce // can be any length, but should be at least 12 bytes.
 	cipher := adiantum.New(key)
 	output := cipher.Decrypt(input, tweak)
