@@ -2,7 +2,7 @@
 
 [Adiantum Encryption](https://security.googleblog.com/2019/02/introducing-adiantum-encryption-for.html)
 
-Nonce usage requires that for each encrypted message a new nonce has to be used.
+For each encrypted message a new nonce has to be used.
 
 Nonces should be at least 12 bytes in size.
 
