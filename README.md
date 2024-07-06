@@ -6,7 +6,7 @@ For each encrypted message a new nonce has to be used.
 
 Nonces should be at least 12 bytes in size.
 
-A key must be 32 hex bytes in size, without LF/CRLF!
+A key file must be 32 hex bytes, without LF/CRLF.
 
 $ adiantum -h, adiantum --help
 
