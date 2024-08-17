@@ -41,7 +41,7 @@ func encryptFromStdin() {
 		os.Exit(1)
 	}
 	if len(keyInput) != 32 {
-		log.Fatalf("Your key is %d hex bytes in size. Exactly 32 hex bytes without CRLF/LF are required.\n", len(keyInput))
+		log.Fatalf("Your key is %d hex bytes in size. Exactly 32 hex bytes are required.\n", len(keyInput))
 		os.Exit(1)
 	}
 	key := keyInput
